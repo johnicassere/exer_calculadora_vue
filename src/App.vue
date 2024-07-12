@@ -1,6 +1,29 @@
 <script setup>
+import { reactive } from 'vue';
 
-const inputValor = ''
+
+const estado = reactive({
+  valor: 0,
+  operacoes: ["soma", "subtracao", "multiplicacao", "divisao"]
+});
+
+function escolhaDaOperacao(evento){
+  estado.valor = evento.target.value
+  
+}
+
+function soma(){
+  estado.valor + estado.valor
+}
+function subtracao(){
+  valor - valor
+}
+function multiplicacao(){
+  valor * valor
+}
+function divisao(){
+  valor / valor
+}
 
 </script>
 
@@ -16,25 +39,23 @@ const inputValor = ''
     <div class="container">
       <section class="section__resultado">
             <h3>Resultado da Operação</h3>
-            <span>48</span>
+            <span>{{ estado.valor }}</span>
       </section>
+
+      <section class="section__operacao">
+                <h3>Escolha a Operção</h3>
+                <select>
+                    <option v-for="operacao in estado.operacoes">{{ operacao }}</option>
+                </select>
+        </section>
     
           <section class="section__valor">
             <label for="">Digite o Valor</label>
             <div>
-              <input type="number">
+              <input @keyup="escolhaDaOperacao" type="number">
             </div>
           </section>
 
-          <section class="section__operacao">
-                <h3>Escolha a Operção</h3>
-                <select name="operacao">
-                    <option value="soma">Soma</option>
-                    <option value="subtracao">Subtração</option>
-                    <option value="multiplicacao">Multiplicação</option>
-                    <option value="divisao">Divisão</option>
-                </select>
-        </section>
     </div>
     
   </body>
